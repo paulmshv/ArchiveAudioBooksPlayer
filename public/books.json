@@ -1,0 +1,268 @@
+{
+  "books": [
+    {
+      "id": "war_and_peace",
+      "author": "Лев Толстой",
+      "series": {
+        "name": "Классика русской литературы",
+        "book_number": 1
+      },
+      "title": "Война и мир",
+      "cover_color": "from-red-900 to-amber-800",
+      "chapters": [
+        {
+          "chapter_number": 1,
+          "chapter_title": "Том 1, Часть 1, Глава I",
+          "book_position": 1,
+          "audio_url": "https://archive.org/download/war_and_peace_2003_librivox/warandpeace_001_tolstoy.mp3",
+          "duration": 2340
+        },
+        {
+          "chapter_number": 2,
+          "chapter_title": "Том 1, Часть 1, Глава II",
+          "book_position": 2,
+          "audio_url": "https://archive.org/download/war_and_peace_2003_librivox/warandpeace_002_tolstoy.mp3",
+          "duration": 1980
+        },
+        {
+          "chapter_number": 3,
+          "chapter_title": "Том 1, Часть 1, Глава III",
+          "book_position": 3,
+          "audio_url": "https://archive.org/download/war_and_peace_2003_librivox/warandpeace_003_tolstoy.mp3",
+          "duration": 2100
+        }
+      ]
+    },
+    {
+      "id": "master_and_margarita",
+      "author": "Михаил Булгаков",
+      "series": {
+        "name": "Классика русской литературы",
+        "book_number": 2
+      },
+      "title": "Мастер и Маргарита",
+      "cover_color": "from-purple-900 to-indigo-800",
+      "chapters": [
+        {
+          "chapter_number": 1,
+          "chapter_title": "Глава 1. Никогда не разговаривайте с неизвестными",
+          "book_position": 1,
+          "audio_url": "https://archive.org/download/master_and_margarita_librivox/master_margarita_01_bulgakov.mp3",
+          "duration": 2700
+        },
+        {
+          "chapter_number": 2,
+          "chapter_title": "Глава 2. Понтий Пилат",
+          "book_position": 2,
+          "audio_url": "https://archive.org/download/master_and_margarita_librivox/master_margarita_02_bulgakov.mp3",
+          "duration": 3200
+        },
+        {
+          "chapter_number": 3,
+          "chapter_title": "Глава 3. Седьмое доказательство",
+          "book_position": 3,
+          "audio_url": "https://archive.org/download/master_and_margarita_librivox/master_margarita_03_bulgakov.mp3",
+          "duration": 2800
+        }
+      ]
+    },
+    {
+      "id": "crime_and_punishment",
+      "author": "Фёдор Достоевский",
+      "series": {
+        "name": "Классика русской литературы",
+        "book_number": 3
+      },
+      "title": "Преступление и наказание",
+      "cover_color": "from-gray-900 to-red-900",
+      "chapters": [
+        {
+          "chapter_number": 1,
+          "chapter_title": "Часть первая, Глава I",
+          "book_position": 1,
+          "audio_url": "https://archive.org/download/crime_and_punishment_librivox/crime_punishment_01_dostoevsky.mp3",
+          "duration": 2500
+        },
+        {
+          "chapter_number": 2,
+          "chapter_title": "Часть первая, Глава II",
+          "book_position": 2,
+          "audio_url": "https://archive.org/download/crime_and_punishment_librivox/crime_punishment_02_dostoevsky.mp3",
+          "duration": 2900
+        },
+        {
+          "chapter_number": 3,
+          "chapter_title": "Часть первая, Глава III",
+          "book_position": 3,
+          "audio_url": "https://archive.org/download/crime_and_punishment_librivox/crime_punishment_03_dostoevsky.mp3",
+          "duration": 2200
+        }
+      ]
+    },
+    {
+      "id": "anna_karenina",
+      "author": "Лев Толстой",
+      "series": {
+        "name": "Классика русской литературы",
+        "book_number": 4
+      },
+      "title": "Анна Каренина",
+      "cover_color": "from-emerald-900 to-teal-800",
+      "chapters": [
+        {
+          "chapter_number": 1,
+          "chapter_title": "Часть I, Глава 1",
+          "book_position": 1,
+          "audio_url": "https://archive.org/download/anna_karenina_librivox/anna_karenina_01_tolstoy.mp3",
+          "duration": 2600
+        },
+        {
+          "chapter_number": 2,
+          "chapter_title": "Часть I, Глава 2",
+          "book_position": 2,
+          "audio_url": "https://archive.org/download/anna_karenina_librivox/anna_karenina_02_tolstoy.mp3",
+          "duration": 2400
+        },
+        {
+          "chapter_number": 3,
+          "chapter_title": "Часть I, Глава 3",
+          "book_position": 3,
+          "audio_url": "https://archive.org/download/anna_karenina_librivox/anna_karenina_03_tolstoy.mp3",
+          "duration": 2100
+        }
+      ]
+    },
+    {
+      "id": "dead_souls",
+      "author": "Николай Гоголь",
+      "series": {
+        "name": "Классика русской литературы",
+        "book_number": 5
+      },
+      "title": "Мёртвые души",
+      "cover_color": "from-yellow-900 to-orange-800",
+      "chapters": [
+        {
+          "chapter_number": 1,
+          "chapter_title": "Том 1, Глава 1",
+          "book_position": 1,
+          "audio_url": "https://archive.org/download/dead_souls_librivox/dead_souls_01_gogol.mp3",
+          "duration": 3100
+        },
+        {
+          "chapter_number": 2,
+          "chapter_title": "Том 1, Глава 2",
+          "book_position": 2,
+          "audio_url": "https://archive.org/download/dead_souls_librivox/dead_souls_02_gogol.mp3",
+          "duration": 2800
+        },
+        {
+          "chapter_number": 3,
+          "chapter_title": "Том 1, Глава 3",
+          "book_position": 3,
+          "audio_url": "https://archive.org/download/dead_souls_librivox/dead_souls_03_gogol.mp3",
+          "duration": 2600
+        }
+      ]
+    },
+    {
+      "id": "fathers_and_sons",
+      "author": "Иван Тургенев",
+      "series": {
+        "name": "Классика русской литературы",
+        "book_number": 6
+      },
+      "title": "Отцы и дети",
+      "cover_color": "from-blue-900 to-cyan-800",
+      "chapters": [
+        {
+          "chapter_number": 1,
+          "chapter_title": "Глава I",
+          "book_position": 1,
+          "audio_url": "https://archive.org/download/fathers_and_sons_librivox/fathers_sons_01_turgenev.mp3",
+          "duration": 1800
+        },
+        {
+          "chapter_number": 2,
+          "chapter_title": "Глава II",
+          "book_position": 2,
+          "audio_url": "https://archive.org/download/fathers_and_sons_librivox/fathers_sons_02_turgenev.mp3",
+          "duration": 2000
+        },
+        {
+          "chapter_number": 3,
+          "chapter_title": "Глава III",
+          "book_position": 3,
+          "audio_url": "https://archive.org/download/fathers_and_sons_librivox/fathers_sons_03_turgenev.mp3",
+          "duration": 1900
+        }
+      ]
+    },
+    {
+      "id": "hero_of_our_time",
+      "author": "Михаил Лермонтов",
+      "series": {
+        "name": "Классика русской литературы",
+        "book_number": 7
+      },
+      "title": "Герой нашего времени",
+      "cover_color": "from-slate-800 to-zinc-700",
+      "chapters": [
+        {
+          "chapter_number": 1,
+          "chapter_title": "Бэла. Часть 1",
+          "book_position": 1,
+          "audio_url": "https://archive.org/download/hero_of_our_time_librivox/hero_time_01_lermontov.mp3",
+          "duration": 2400
+        },
+        {
+          "chapter_number": 2,
+          "chapter_title": "Бэла. Часть 2",
+          "book_position": 2,
+          "audio_url": "https://archive.org/download/hero_of_our_time_librivox/hero_time_02_lermontov.mp3",
+          "duration": 2200
+        },
+        {
+          "chapter_number": 3,
+          "chapter_title": "Максим Максимыч",
+          "book_position": 3,
+          "audio_url": "https://archive.org/download/hero_of_our_time_librivox/hero_time_03_lermontov.mp3",
+          "duration": 1600
+        }
+      ]
+    },
+    {
+      "id": "evgeny_onegin",
+      "author": "Александр Пушкин",
+      "series": {
+        "name": "Классика русской литературы",
+        "book_number": 8
+      },
+      "title": "Евгений Онегин",
+      "cover_color": "from-rose-900 to-pink-800",
+      "chapters": [
+        {
+          "chapter_number": 1,
+          "chapter_title": "Глава первая",
+          "book_position": 1,
+          "audio_url": "https://archive.org/download/evgeny_onegin_librivox/evgeny_onegin_01_pushkin.mp3",
+          "duration": 3600
+        },
+        {
+          "chapter_number": 2,
+          "chapter_title": "Глава вторая",
+          "book_position": 2,
+          "audio_url": "https://archive.org/download/evgeny_onegin_librivox/evgeny_onegin_02_pushkin.mp3",
+          "duration": 3200
+        },
+        {
+          "chapter_number": 3,
+          "chapter_title": "Глава третья",
+          "book_position": 3,
+          "audio_url": "https://archive.org/download/evgeny_onegin_librivox/evgeny_onegin_03_pushkin.mp3",
+          "duration": 3400
+        }
+      ]
+    }
+  ]
+}

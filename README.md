@@ -88,9 +88,10 @@ npm run typecheck
 ```
 audiobook-app/
 ├── src/
-│   ├── components/          # React компоненты (будущее)
+│   ├── context/
+│   │   └── BooksContext.tsx # React Context для загрузки книг
 │   ├── data/
-│   │   └── books.ts        # Данные о книгах
+│   │   └── books.ts        # Типы и функция загрузки книг
 │   ├── pages/
 │   │   ├── LoginPage.tsx   # Страница авторизации
 │   │   ├── HomePage.tsx    # Главная страница
@@ -100,13 +101,105 @@ audiobook-app/
 │   ├── App.tsx             # Главный компонент с роутингом
 │   ├── main.tsx            # Точка входа
 │   └── index.css           # Глобальные стили
-├── public/                  # Статические файлы
+├── public/
+│   └── books.json          # ⭐ ДАННЫЕ О КНИГАХ (положите сюда)
 ├── dist/                    # Сборка для продакшена
 ├── index.html              # HTML шаблон
 ├── package.json            # Зависимости проекта
 ├── tsconfig.json           # Конфигурация TypeScript
 └── vite.config.js          # Конфигурация Vite
 ```
+
+## 📂 Файл books.json
+
+**Куда положить:** `public/books.json`
+
+Приложение загружает данные о книгах из JSON-файла по пути `/books.json`. Файл должен находиться в папке `public/` — тогда он будет доступен после сборки.
+
+### Формат файла
+
+```json
+{
+  "books": [
+    {
+      "id": "unique_book_id",
+      "author": "Имя Автора",
+      "series": {
+        "name": "Название серии",
+        "book_number": 1
+      },
+      "title": "Название книги",
+      "cover_color": "from-red-900 to-amber-800",
+      "chapters": [
+        {
+          "chapter_number": 1,
+          "chapter_title": "Глава 1",
+          "book_position": 1,
+          "audio_url": "https://archive.org/download/...",
+          "duration": 3600
+        }
+      ]
+    }
+  ]
+}
+```
+
+### Описание полей
+
+| Поле | Тип | Описание |
+|------|-----|----------|
+| `id` | string | Уникальный идентификатор книги |
+| `author` | string | Имя автора |
+| `series.name` | string | Название серии |
+| `series.book_number` | number | Номер книги в серии |
+| `title` | string | Название книги |
+| `cover_color` | string | CSS-классы градиента для обложки (Tailwind) |
+| `chapters` | array | Массив глав |
+| `chapters[].chapter_number` | number | Номер главы |
+| `chapters[].chapter_title` | string | Название главы |
+| `chapters[].book_position` | number | Позиция в книге |
+| `chapters[].audio_url` | string | URL аудиофайла (mp3) |
+| `chapters[].duration` | number | Длительность в секундах |
+
+### Доступные градиенты для cover_color
+
+Используйте классы Tailwind CSS:
+- `from-red-900 to-amber-800`
+- `from-purple-900 to-indigo-800`
+- `from-emerald-900 to-teal-800`
+- `from-blue-900 to-cyan-800`
+- `from-rose-900 to-pink-800`
+- `from-yellow-900 to-orange-800`
+- и другие градиенты Tailwind
+
+### Пример: как добавить свою книгу
+
+1. Откройте файл `public/books.json`
+2. Добавьте новый объект в массив `books`:
+
+```json
+{
+  "id": "my_book",
+  "author": "Автор",
+  "series": {
+    "name": "Моя серия",
+    "book_number": 1
+  },
+  "title": "Моя книга",
+  "cover_color": "from-blue-900 to-purple-800",
+  "chapters": [
+    {
+      "chapter_number": 1,
+      "chapter_title": "Глава 1",
+      "book_position": 1,
+      "audio_url": "https://example.com/audio.mp3",
+      "duration": 1800
+    }
+  ]
+}
+```
+
+3. Перезапустите приложение — книга появится в каталоге
 
 ## 🛠️ Технологии
 
