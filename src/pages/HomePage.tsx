@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { books } from '../data/books';
 import { getCurrentUser, getListeningHistory, logout } from '../services/storage';
 import { Search, BookOpen, LogOut, Clock, Play, Headphones, User } from 'lucide-react';
-import { motion } from 'framer-motion';
 import type { ListeningHistoryEntry } from '../services/storage';
 
 interface HistoryBook {
@@ -107,12 +106,7 @@ export default function HomePage() {
 
       <main className="max-w-6xl mx-auto px-4 py-6">
         {/* Search */}
-        <motion.div 
-          className="relative mb-8"
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-        >
+        <div className="relative mb-8">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
           <input
             type="text"
@@ -129,27 +123,19 @@ export default function HomePage() {
               ✕
             </button>
           )}
-        </motion.div>
+        </div>
 
         {/* History Section */}
         {history.length > 0 && !searchQuery && (
-          <motion.section 
-            className="mb-8"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-          >
+          <section className="mb-8">
             <div className="flex items-center gap-2 mb-4">
               <Clock className="w-5 h-5 text-amber-500" />
               <h2 className="text-lg font-semibold text-white">Недавно прослушанные</h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {history.map(({ entry, book }, index) => (
-                <motion.div
+              {history.map(({ entry, book }) => (
+                <div
                   key={entry.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 * index }}
                   onClick={() => navigate(`/book/${book.id}`)}
                   className="group bg-gray-800/50 border border-gray-700 rounded-xl p-4 hover:border-amber-500/50 hover:bg-gray-800 transition-all cursor-pointer"
                 >
@@ -163,11 +149,9 @@ export default function HomePage() {
                       <p className="text-xs text-gray-500 mt-1">{getLastPosition(book.id)}</p>
                       <div className="mt-2 flex items-center gap-2">
                         <div className="flex-1 h-1.5 bg-gray-700 rounded-full overflow-hidden">
-                          <motion.div
-                            className="h-full bg-amber-500 rounded-full"
-                            initial={{ width: 0 }}
-                            animate={{ width: `${getProgressPercent(book.id)}%` }}
-                            transition={{ delay: 0.3 + index * 0.1, duration: 0.5 }}
+                          <div
+                            className="h-full bg-amber-500 rounded-full transition-all"
+                            style={{ width: `${getProgressPercent(book.id)}%` }}
                           />
                         </div>
                         <span className="text-xs text-gray-500">{getProgressPercent(book.id)}%</span>
@@ -178,18 +162,14 @@ export default function HomePage() {
                     <Play className="w-3.5 h-3.5" />
                     Продолжить
                   </button>
-                </motion.div>
+                </div>
               ))}
             </div>
-          </motion.section>
+          </section>
         )}
 
         {/* Books Grid */}
-        <motion.section
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-        >
+        <section>
           <h2 className="text-lg font-semibold text-white mb-4">
             {searchQuery ? `Результаты поиска (${filteredBooks.length})` : 'Все книги'}
           </h2>
@@ -201,16 +181,13 @@ export default function HomePage() {
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {filteredBooks.map((book, index) => {
+              {filteredBooks.map(book => {
                 const bookHistory = history.find(h => h.book.id === book.id);
                 const progress = bookHistory ? getProgressPercent(book.id) : 0;
                 
                 return (
-                  <motion.div
+                  <div
                     key={book.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.05 * index }}
                     onClick={() => navigate(`/book/${book.id}`)}
                     className="group bg-gray-800/50 border border-gray-700 rounded-xl overflow-hidden hover:border-amber-500/50 hover:shadow-lg hover:shadow-amber-500/5 transition-all cursor-pointer"
                   >
@@ -252,12 +229,12 @@ export default function HomePage() {
                         <p className="text-xs text-gray-600 mt-2 truncate">{book.series.name}</p>
                       )}
                     </div>
-                  </motion.div>
+                  </div>
                 );
               })}
             </div>
           )}
-        </motion.section>
+        </section>
       </main>
     </div>
   );
