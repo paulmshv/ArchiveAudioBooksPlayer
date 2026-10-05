@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { books } from '../data/books';
+import { useBooks } from '../context/BooksContext';
 import { getCurrentUser, getProgress, saveProgress } from '../services/storage';
 import { 
   ArrowLeft, Play, Pause, SkipBack, SkipForward, 
@@ -10,6 +10,7 @@ import {
 export default function BookPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { books, isLoading } = useBooks();
   const book = books.find(b => b.id === id);
   
   const [currentChapter, setCurrentChapter] = useState(0);
@@ -19,17 +20,19 @@ export default function BookPage() {
   const [volume, setVolume] = useState(1);
   const [isMuted, setIsMuted] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingAudio, setIsLoadingAudio] = useState(true);
   const [audioError, setAudioError] = useState(false);
   
   const audioRef = useRef<HTMLAudioElement>(null);
   const progressInterval = useRef<number | null>(null);
 
   useEffect(() => {
-    if (!book) {
+    if (!isLoading && !book) {
       navigate('/');
       return;
     }
+
+    if (!book) return;
 
     // Check for saved progress
     const user = getCurrentUser();
@@ -58,7 +61,7 @@ export default function BookPage() {
         }
       }
     }
-  }, [book, navigate]);
+  }, [book, isLoading, navigate]);
 
   // Auto-save progress every 5 seconds
   useEffect(() => {
@@ -159,7 +162,7 @@ export default function BookPage() {
       audioRef.current.pause();
     }
     setIsPlaying(false);
-    setIsLoading(true);
+    setIsLoadingAudio(true);
     setAudioError(false);
     handlePause();
     
@@ -194,7 +197,7 @@ export default function BookPage() {
       audioRef.current.pause();
     }
     setIsPlaying(false);
-    setIsLoading(true);
+    setIsLoadingAudio(true);
     setAudioError(false);
     handlePause();
     setCurrentChapter(index);
@@ -237,6 +240,17 @@ export default function BookPage() {
     }
     return `${m}:${s.toString().padStart(2, '0')}`;
   };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-slate-900 to-gray-800 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-12 h-12 border-4 border-amber-500/30 border-t-amber-500 rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-gray-400">Загрузка...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!book) {
     return (
@@ -291,7 +305,7 @@ export default function BookPage() {
             Главы ({book.chapters.length})
           </h3>
           <div className="space-y-1">
-            {book.chapters.map((ch, index) => {
+            {book.chapters.map((ch, index: number) => {
               const user = getCurrentUser();
               const progress = user ? getProgress(user.id, book.id, ch.chapter_number) : null;
               const isActive = index === currentChapter;
@@ -351,14 +365,14 @@ export default function BookPage() {
           onTimeUpdate={handleTimeUpdate}
           onLoadedMetadata={() => {
             handleLoadedMetadata();
-            setIsLoading(false);
+            setIsLoadingAudio(false);
             setAudioError(false);
           }}
-          onWaiting={() => setIsLoading(true)}
-          onCanPlay={() => setIsLoading(false)}
+          onWaiting={() => setIsLoadingAudio(true)}
+          onCanPlay={() => setIsLoadingAudio(false)}
           onError={() => {
             setAudioError(true);
-            setIsLoading(false);
+            setIsLoadingAudio(false);
           }}
           onEnded={() => {
             setIsPlaying(false);
@@ -418,7 +432,7 @@ export default function BookPage() {
                 disabled={audioError}
                 className="w-12 h-12 rounded-full bg-amber-500 hover:bg-amber-600 disabled:bg-gray-600 flex items-center justify-center transition-colors shadow-lg shadow-amber-500/20"
               >
-                {isLoading && !isPlaying ? (
+                {isLoadingAudio && !isPlaying ? (
                   <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                 ) : isPlaying ? (
                   <Pause className="w-5 h-5 text-white" />

@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { books } from '../data/books';
+import { useBooks } from '../context/BooksContext';
+import type { Book } from '../data/books';
 import { getCurrentUser, getListeningHistory, logout } from '../services/storage';
 import { Search, BookOpen, LogOut, Clock, Play, Headphones, User } from 'lucide-react';
 import type { ListeningHistoryEntry } from '../services/storage';
 
 interface HistoryBook {
   entry: ListeningHistoryEntry;
-  book: typeof books[0];
+  book: Book;
 }
 
 export default function HomePage() {
+  const { books, isLoading, error } = useBooks();
   const [searchQuery, setSearchQuery] = useState('');
   const [history, setHistory] = useState<HistoryBook[]>([]);
   const [userType, setUserType] = useState<string>('');
@@ -31,7 +33,7 @@ export default function HomePage() {
       return { entry, book: book! };
     }).filter(h => h.book);
     setHistory(historyBooks);
-  }, [navigate]);
+  }, [navigate, books]);
 
   const filteredBooks = books.filter(book => {
     const q = searchQuery.toLowerCase();
@@ -76,6 +78,29 @@ export default function HomePage() {
     
     return `Глава ${bookHistory.entry.chapter_number}: ${formatDuration(bookHistory.entry.current_position)}`;
   };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-slate-900 to-gray-800 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-12 h-12 border-4 border-amber-500/30 border-t-amber-500 rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-gray-400">Загрузка книг...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-slate-900 to-gray-800 flex items-center justify-center p-4">
+        <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-6 max-w-md text-center">
+          <p className="text-red-400 font-medium mb-2">Ошибка загрузки</p>
+          <p className="text-red-400/70 text-sm">{error}</p>
+          <p className="text-gray-500 text-xs mt-3">Убедитесь, что файл public/books.json существует</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-slate-900 to-gray-800">
@@ -222,7 +247,7 @@ export default function HomePage() {
                         </span>
                         <span className="text-xs text-gray-500 flex items-center gap-1">
                           <Clock className="w-3 h-3" />
-                          {formatDuration(book.chapters.reduce((sum, c) => sum + c.duration, 0))}
+                          {formatDuration(book.chapters.reduce((sum: number, c) => sum + c.duration, 0))}
                         </span>
                       </div>
                       {book.series.name && (
